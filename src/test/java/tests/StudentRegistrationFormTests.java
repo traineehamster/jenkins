@@ -1,15 +1,9 @@
 package tests;
 
 import com.github.javafaker.Faker;
-import gender.Gender;
-import hobby.Hobby;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import pages.RegistrationPage;
-import pages.ResultTable;
-import student.Student;
-
-import java.time.LocalDate;
-import java.util.Arrays;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -17,6 +11,33 @@ import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
 public class StudentRegistrationFormTests extends TestBase {
+
+    private WebSteps steps = new WebSteps();
+
+    @Test
+    @Tag("nice_allure_steps")
+    @DisplayName("Check the registration can be submitted with test data")
+    void successfulSubmitRegistrationForm() {
+        steps.openStudentRegistrationPage();
+        steps.checkThisIsStudentRegistrationPage();
+
+        steps.fillTheForm(testData.firstName, testData.lastName, testData.email,
+                testData.genderM, testData.testPhoneNumber, testData.monthOfBirth,
+                testData.yearOfBirth, testData.dayOfBirth, testData.subject1, testData.picture,
+                testData.hobby1, testData.testAddress);
+        steps.selectState(testData.ncrState);
+        steps.selectCity(testData.delhiCity);
+
+        steps.submitTheForm();
+        steps.makeScreenshot();
+
+        steps.checkThisIsRegistrationConfirmationPage();
+        steps.checkTheValueInFormByLine(testData.firstName, testData.lastName,
+                testData.email, testData.genderM, testData.testPhoneNumber, testData.dayOfBirth,
+                testData.monthOfBirth, testData.yearOfBirth, testData.subject1, testData.hobby1,
+                testData.picture, testData.testAddress, testData.ncrState, testData.delhiCity);
+    }
+
 
     Faker faker = new Faker();
 
@@ -97,24 +118,4 @@ public class StudentRegistrationFormTests extends TestBase {
             $x("//td[text()='State and City']").parent().shouldHave(text(state + " " + city));
         });
     }
-
-//    @Test
-//    void successfulRegistration() {
-//        Student student = new Student("Name1",
-//                "LastName1",
-//                "student@email.com",
-//                Gender.Male,
-//                "9998887776",
-//                LocalDate.of(2000, 2, 15),
-//                Arrays.asList("Computer Science", "Physics"),
-//                Arrays.asList(Hobby.Sports, Hobby.Music),
-//                "Student address 123 123",
-//                "src/test/resources/img/1.png",
-//                "NCR",
-//                "Delhi"
-//        );
-//
-//        RegistrationPage.registerStudent(student);
-//        ResultTable.verifyInputDataForStudent(student);
-//    }
 }

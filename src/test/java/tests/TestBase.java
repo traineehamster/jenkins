@@ -15,6 +15,8 @@ import static config.Credentials.credentials;
 
 public class TestBase {
 
+    TestData testData = new TestData();
+
     @BeforeAll
     public static void setup() {
         final String login = credentials.login();
