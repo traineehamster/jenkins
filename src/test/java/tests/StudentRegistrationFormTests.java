@@ -23,7 +23,7 @@ public class StudentRegistrationFormTests extends TestBase {
                 Arrays.asList("Computer Science", "Physics"),
                 Arrays.asList(Hobby.Sports, Hobby.Music),
                 "Student address 123 123",
-                "src/test/resources/logo.png",
+                "src/test/resources/img/1.png",
                 "NCR",
                 "Delhi"
         );
