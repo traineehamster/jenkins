@@ -19,11 +19,11 @@ public class TestBase {
     public static void setup() {
         final String login = credentials.login();
         final String password = credentials.password();
-        final String remoteUrl =   System.getProperty("selenoidUrl");
+        final String remoteUrl = System.getProperty("selenoidUrl");
         final String selenoidUrl = String.format("https://%s:%s@%s", login, password, remoteUrl);
 
         Configuration.startMaximized = true;
-
+        Configuration.baseUrl = "https://demoqa.com";
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
