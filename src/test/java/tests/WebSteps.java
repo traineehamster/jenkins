@@ -47,11 +47,6 @@ public class WebSteps {
             stateAndCity = $x("//td[text()='State and City']").parent();
     ElementsCollection listInDropMenu = $$("[id^='react-select-']");
 
-//    @Step("Open main github page")
-//    public void openMainPage() {
-//        open(BASE_URL);
-//    }
-
     @Step("Open Student Registration Form Page")
     public void openStudentRegistrationPage() {
         open(STUDENT_REGISTRATION_FORM);
