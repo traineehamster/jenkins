@@ -15,10 +15,4 @@ public interface CredentialsConfig extends Config {
 
     @Key("password")
     String password();
-
-    @Key("selenoid_protocol")
-    String protocol();
-
-    @Key("selenoid_domain")
-    String domain();
 }
